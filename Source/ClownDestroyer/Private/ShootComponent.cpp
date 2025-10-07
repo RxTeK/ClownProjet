@@ -32,3 +32,13 @@ void UShootComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	// ...
 }
 
+void UShootComponent::ShootStart()
+{
+	
+}
+
+void UShootComponent::ShootEnd()
+{
+	
+}
+

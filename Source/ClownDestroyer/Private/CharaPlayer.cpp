@@ -57,16 +57,6 @@ void ACharaPlayer::Rotation(const FInputActionValue& Value)
 	
 }
 
-void ACharaPlayer::ShootFinish()
-{
-	
-}
-
-void ACharaPlayer::Shoot()
-{
-	
-}
-
 // Called every frame
 void ACharaPlayer::Tick(float DeltaTime)
 {
@@ -87,10 +77,10 @@ void ACharaPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	}
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		EnhancedInputComponent->BindAction(ShootAction,ETriggerEvent::Triggered,this,&ACharaPlayer::Shoot);
+		EnhancedInputComponent->BindAction(ShootAction,ETriggerEvent::Triggered,ShootComponentRef,&UShootComponent::ShootStart);
 		EnhancedInputComponent->BindAction(MoveAction,ETriggerEvent::Triggered,this,&ACharaPlayer::Move);
-		EnhancedInputComponent->BindAction(ShootAction,ETriggerEvent::Canceled,this,&ACharaPlayer::ShootFinish);
-		EnhancedInputComponent->BindAction(ShootAction,ETriggerEvent::Completed,this,&ACharaPlayer::ShootFinish);
+		EnhancedInputComponent->BindAction(ShootAction,ETriggerEvent::Canceled,ShootComponentRef,&UShootComponent::ShootEnd);
+		EnhancedInputComponent->BindAction(ShootAction,ETriggerEvent::Completed,ShootComponentRef,&UShootComponent::ShootEnd);
 	}
 
 }

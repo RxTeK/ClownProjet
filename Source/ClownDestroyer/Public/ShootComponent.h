@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "ShootComponent.generated.h"
 
+class ACharaPlayer;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class CLOWNDESTROYER_API UShootComponent : public UActorComponent
@@ -20,9 +21,13 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	ACharaPlayer* Character;
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+	void ShootStart();
+	void ShootEnd();
+	
 };

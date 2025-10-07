@@ -48,14 +48,11 @@ protected:
 	void Move(const FInputActionValue& Value);
 
 	void Rotation(const FInputActionValue& Value);
-	
-	void ShootFinish();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Component)
 	UShootComponent* ShootComponentRef;
 
-	/** Called for looking input */
-	void Shoot();
+	
 	
 	UPROPERTY()
 	FVector2D MovementVector;
