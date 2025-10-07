@@ -8,6 +8,7 @@
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "EnhancedInputSubsystems.h"
+#include "ShootComponent.h"
 
 // Sets default values
 ACharaPlayer::ACharaPlayer()
@@ -19,6 +20,8 @@ ACharaPlayer::ACharaPlayer()
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>("Camera");
 	SpringArmComponent->SetupAttachment(RootComponent);
 	CameraComponent->SetupAttachment(SpringArmComponent);
+
+	ShootComponentRef = CreateDefaultSubobject<UShootComponent>("SootComponent");
 }
 
 // Called when the game starts or when spawned
@@ -31,6 +34,8 @@ void ACharaPlayer::BeginPlay()
 void ACharaPlayer::Move(const FInputActionValue& Value)
 {
 	MovementVector = Value.Get<FVector2D>();
+
+	if (FMath::Abs(MovementVector.X) < 0.2f && FMath::Abs(MovementVector.Y) < 0.2f){return;}
 	
 	const FRotator Rotator = CameraComponent->GetComponentRotation();
 	const FRotator YawRotation(0, Rotator.Yaw, 0);
@@ -40,6 +45,16 @@ void ACharaPlayer::Move(const FInputActionValue& Value)
 			
 	AddMovementInput(ForwardDirection, MovementVector.Y);
 	AddMovementInput(RightDirection, MovementVector.X);
+}
+
+void ACharaPlayer::Rotation(const FInputActionValue& Value)
+{
+	RotationVector = Value.Get<FVector2D>();
+
+	if (FMath::Abs(RotationVector.X) < 0.2f && FMath::Abs(RotationVector.Y) < 0.2f){return;}
+	const FRotator Rotator = CameraComponent->GetComponentRotation();
+	const FRotator YawRotation(0, Rotator.Yaw, 0);
+	
 }
 
 void ACharaPlayer::ShootFinish()

@@ -9,6 +9,7 @@
 class UCameraComponent;
 class USpringArmComponent;
 class UInputAction;
+class UShootComponent;
 class UInputMappingContext;
 struct FInputActionValue;
 
@@ -32,8 +33,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* MoveAction;
 
-	UPROPERTY()
-	FVector2D MovementVector;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* RotateAction;
+
+	
 
  
 
@@ -43,11 +46,22 @@ protected:
 
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
+
+	void Rotation(const FInputActionValue& Value);
+	
 	void ShootFinish();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Component)
+	UShootComponent* ShootComponentRef;
 
 	/** Called for looking input */
 	void Shoot();
+	
+	UPROPERTY()
+	FVector2D MovementVector;
 
+	UPROPERTY()
+	FVector2D RotationVector;
 	
 
 public:	
