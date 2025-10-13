@@ -1,0 +1,58 @@
+// EnemyAI.cpp
+#include "Clown.h"
+#include "Kismet/GameplayStatics.h"
+#include "AIController.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "CharaPlayer.h"
+
+AClown::AClown()
+{
+	PrimaryActorTick.bCanEverTick = true;
+}
+
+void AClown::BeginPlay()
+{
+	Super::BeginPlay();
+
+	PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+}
+
+void AClown::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (!PlayerPawn) return;
+
+	float Distance = FVector::Dist(GetActorLocation(), PlayerPawn->GetActorLocation());
+	UE_LOG(LogTemp, Warning, TEXT("tick"));
+
+	if (Distance < FollowDistance)
+	{
+		AAIController* AICon = Cast<AAIController>(GetController());
+		if (AICon)
+		{
+			AICon->MoveToActor(PlayerPawn, 5.0f);
+		}
+
+		if (Distance < AttackRange && bCanAttack)
+		{
+			AttackPlayer();
+		}
+	}
+}
+
+void AClown::AttackPlayer()
+{
+	bCanAttack = false;
+	
+	if (ACharaPlayer* Player = Cast<ACharaPlayer>(PlayerPawn))
+	{
+		Player->PV -= 1;
+	}
+	GetWorldTimerManager().SetTimer(AttackCooldownTimer, this, &AClown::ResetAttack, AttackCooldown, false);
+}
+
+void AClown::ResetAttack()
+{
+	bCanAttack = true;
+}

@@ -74,4 +74,6 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	USpringArmComponent* SpringArmComponent;
+
+	int PV = 3;
 };
