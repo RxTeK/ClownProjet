@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "PaperZDCharacter.h"
 #include "GameFramework/Character.h"
 #include "CharaPlayer.generated.h"
 
@@ -15,7 +16,7 @@ struct FInputActionValue;
 
 
 UCLASS()
-class CLOWNDESTROYER_API ACharaPlayer : public ACharacter
+class CLOWNDESTROYER_API ACharaPlayer : public APaperZDCharacter
 {
 	GENERATED_BODY()
 

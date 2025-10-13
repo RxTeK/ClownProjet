@@ -8,7 +8,10 @@
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "EnhancedInputSubsystems.h"
+#include "INodeAndChannelMappings.h"
+#include "PaperFlipbookComponent.h"
 #include "ShootComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 
 // Sets default values
 ACharaPlayer::ACharaPlayer()
@@ -61,6 +64,9 @@ void ACharaPlayer::Rotation(const FInputActionValue& Value)
 void ACharaPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	FRotator Rotator = UKismetMathLibrary::FindLookAtRotation(GetSprite()->GetComponentLocation(),CameraComponent->GetComponentLocation());
+	GetSprite()->SetWorldRotation(FRotator(0, Rotator.Yaw - 90, Rotator.Roll - 45));
 
 }
 
