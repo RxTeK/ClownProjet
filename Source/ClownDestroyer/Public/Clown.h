@@ -42,4 +42,7 @@ public:
 
 	void AttackPlayer();
 	void ResetAttack();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stat")
+	int Pv = 2;
 };
