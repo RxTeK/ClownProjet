@@ -11,6 +11,8 @@
 #include "INodeAndChannelMappings.h"
 #include "PaperFlipbookComponent.h"
 #include "ShootComponent.h"
+#include "Blueprint/UserWidget.h"
+#include "HealthWidget.h"
 #include "Kismet/KismetMathLibrary.h"
 
 // Sets default values
@@ -31,6 +33,14 @@ ACharaPlayer::ACharaPlayer()
 void ACharaPlayer::BeginPlay()
 {
 	Super::BeginPlay();
+	if (HealthWidgetClass)
+	{
+		HealthWidgetInstance = CreateWidget<UHealthWidget>(GetWorld(), HealthWidgetClass);
+		if (HealthWidgetInstance)
+		{
+			HealthWidgetInstance->AddToViewport();
+		}
+	}
 	
 }
 

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "PaperZDCharacter.h"
 #include "GameFramework/Character.h"
+#include "HealthWidget.h" 
 #include "CharaPlayer.generated.h"
 
 class UCameraComponent;
@@ -73,4 +74,11 @@ public:
 	USpringArmComponent* SpringArmComponent;
 
 	int PV = 3;
+
+	UPROPERTY(EditAnywhere, Category = "UI")
+	TSubclassOf<UHealthWidget> HealthWidgetClass;
+
+	private:
+	UHealthWidget* HealthWidgetInstance;
+	
 };
