@@ -6,6 +6,8 @@
 #include "PaperZDCharacter.h"
 #include "GameFramework/Character.h"
 #include "HealthWidget.h" 
+#include "Components/ArrowComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "CharaPlayer.generated.h"
 
 class UCameraComponent;
@@ -52,13 +54,6 @@ protected:
 	UShootComponent* ShootComponentRef;
 
 	
-	
-	UPROPERTY()
-	FVector2D MovementVector;
-
-	UPROPERTY()
-	FVector2D RotationVector;
-	
 
 public:	
 	// Called every frame
@@ -72,6 +67,15 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	USpringArmComponent* SpringArmComponent;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UArrowComponent* ArrowPlayer;
+
+	UPROPERTY()
+	FVector2D MovementVector;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	FVector2D RotationVector;
 
 	int PV = 3;
 

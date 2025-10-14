@@ -25,8 +25,11 @@ ACharaPlayer::ACharaPlayer()
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>("Camera");
 	SpringArmComponent->SetupAttachment(RootComponent);
 	CameraComponent->SetupAttachment(SpringArmComponent);
+	
+	ArrowPlayer = CreateDefaultSubobject<UArrowComponent>("Arrow Player");
+	ArrowPlayer->SetupAttachment(GetCapsuleComponent());
 
-	ShootComponentRef = CreateDefaultSubobject<UShootComponent>("SootComponent");
+	ShootComponentRef = CreateDefaultSubobject<UShootComponent>("ShootComponent");
 }
 
 // Called when the game starts or when spawned
@@ -67,7 +70,12 @@ void ACharaPlayer::Rotation(const FInputActionValue& Value)
 	if (FMath::Abs(RotationVector.X) < 0.2f && FMath::Abs(RotationVector.Y) < 0.2f){return;}
 	const FRotator Rotator = CameraComponent->GetComponentRotation();
 	const FRotator YawRotation(0, Rotator.Yaw, 0);
-	GetController()->SetControlRotation(UKismetMathLibrary::MakeRotFromX(Vector));
+	ArrowPlayer->SetWorldRotation(UKismetMathLibrary::MakeRotFromX(Vector));
+	if (ShootComponentRef)
+	{
+		ShootComponentRef->ShootBeginEnter();
+	}
+	
 	
 }
 

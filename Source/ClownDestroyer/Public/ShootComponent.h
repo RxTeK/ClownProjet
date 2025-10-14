@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FPSProjectile.h"
 #include "Components/ActorComponent.h"
 #include "ShootComponent.generated.h"
 
@@ -24,11 +25,19 @@ protected:
 	UPROPERTY()
 	ACharaPlayer* Character;
 
+	FTimerHandle TimerHandle;
+
+	void ShootStart();
+	void ShootRate();
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void ShootStart();
-	void ShootEnd();
+	void ShootBeginEnter();
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TSubclassOf<class AFPSProjectile> ProjectilShoot;
+	
 	
 };
