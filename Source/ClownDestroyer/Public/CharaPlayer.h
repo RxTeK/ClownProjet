@@ -37,7 +37,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* MoveAction;
 
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Component)
+	UShootComponent* ShootComponentRef;
 
  
 
@@ -50,8 +51,7 @@ protected:
 
 	void Rotation(const FInputActionValue& Value);
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Component)
-	UShootComponent* ShootComponentRef;
+
 
 	
 

@@ -37,7 +37,7 @@ public:
 	void ShootBeginEnter();
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	TSubclassOf<class AFPSProjectile> ProjectilShoot;
+	TSubclassOf<AFPSProjectile> ProjectilShoot;
 	
 	
 };

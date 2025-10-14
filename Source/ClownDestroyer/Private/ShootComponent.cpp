@@ -40,19 +40,27 @@ void UShootComponent::ShootBeginEnter()
 	if (TimerHandle.IsValid() == false)
 	{
 		GetOwner()->GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UShootComponent::ShootRate, 0.5f, false);
+		ShootStart();
 	}
 }
 
 void UShootComponent::ShootStart()
 {
 	// Exemple dans une fonction de votre personnage ou autre acteur
-	FVector SpawnLocation = Character->GetActorLocation() + Character->GetActorForwardVector() * 100.0f;
+	FVector SpawnLocation = Character->GetActorLocation() + Character->ArrowPlayer->GetForwardVector() * 100.0f;
 	FRotator SpawnRotation = Character->ArrowPlayer->GetComponentRotation();
+	FActorSpawnParameters SpawnParameters;
+	SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+	SpawnParameters.Owner = Character->GetOwner();
+	
+	
 
+	GEngine->AddOnScreenDebugMessage(-1,0.5f,FColor::Blue,"StartShoot");
 	AFPSProjectile* Projectile = GetWorld()->SpawnActor<AFPSProjectile>(
 		ProjectilShoot,
 		SpawnLocation,
-		SpawnRotation
+		SpawnRotation,
+		SpawnParameters
 	);
 
 	if (Projectile)
