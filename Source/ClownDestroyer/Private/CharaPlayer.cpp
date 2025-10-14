@@ -53,10 +53,11 @@ void ACharaPlayer::Move(const FInputActionValue& Value)
 void ACharaPlayer::Rotation(const FInputActionValue& Value)
 {
 	RotationVector = Value.Get<FVector2D>();
-
+	FVector Vector = FVector(RotationVector.X, RotationVector.Y, 0);
 	if (FMath::Abs(RotationVector.X) < 0.2f && FMath::Abs(RotationVector.Y) < 0.2f){return;}
 	const FRotator Rotator = CameraComponent->GetComponentRotation();
 	const FRotator YawRotation(0, Rotator.Yaw, 0);
+	GetController()->SetControlRotation(UKismetMathLibrary::MakeRotFromX(Vector));
 	
 }
 
@@ -83,10 +84,10 @@ void ACharaPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	}
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		EnhancedInputComponent->BindAction(ShootAction,ETriggerEvent::Triggered,ShootComponentRef,&UShootComponent::ShootStart);
+		EnhancedInputComponent->BindAction(ShootAction,ETriggerEvent::Triggered,this,&ACharaPlayer::Rotation);
 		EnhancedInputComponent->BindAction(MoveAction,ETriggerEvent::Triggered,this,&ACharaPlayer::Move);
-		EnhancedInputComponent->BindAction(ShootAction,ETriggerEvent::Canceled,ShootComponentRef,&UShootComponent::ShootEnd);
-		EnhancedInputComponent->BindAction(ShootAction,ETriggerEvent::Completed,ShootComponentRef,&UShootComponent::ShootEnd);
+		EnhancedInputComponent->BindAction(ShootAction,ETriggerEvent::Canceled,this,&ACharaPlayer::Rotation);
+		EnhancedInputComponent->BindAction(ShootAction,ETriggerEvent::Completed,this,&ACharaPlayer::Rotation);
 	}
 
 }
