@@ -11,6 +11,7 @@ AFPSProjectile::AFPSProjectile()
 	CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
 	CollisionComponent->InitSphereRadius(15.0f);
 	CollisionComponent->SetCollisionProfileName(TEXT("Projectile"));
+	CollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &AFPSProjectile::OnComponentOverlap);
 	RootComponent = CollisionComponent;
 
 	ProjectileMeshComponent = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("ProjectileMeshComponent"));
@@ -31,6 +32,16 @@ AFPSProjectile::AFPSProjectile()
 void AFPSProjectile::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void AFPSProjectile::OnComponentOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (AParentAI* IA = Cast<AParentAI>(OtherActor))
+	{
+		IA->SetPV(Damage);
+		K2_DestroyActor();
+	}
 }
 
 void AFPSProjectile::FireInDirection(const FVector& ShootDirection)

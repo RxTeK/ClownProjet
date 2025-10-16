@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "PaperFlipbookComponent.h"
 #include "GameFramework/Actor.h"
+#include "ParentAI.h"
 #include "FPSProjectile.generated.h"
  
 class USphereComponent;
@@ -28,7 +29,13 @@ public:
  
 	UFUNCTION(BlueprintCallable, Category = "Projectile")
 	void FireInDirection(const FVector& ShootDirection);
+
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Projectile")
+	float Damage;
  
 protected:
 	virtual void BeginPlay() override;
+
+	UFUNCTION()
+	void OnComponentOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 };

@@ -38,6 +38,9 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	TSubclassOf<AFPSProjectile> ProjectilShoot;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float SpeedAttack = 1.f;
 	
 	
 };

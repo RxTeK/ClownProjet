@@ -39,7 +39,7 @@ void UShootComponent::ShootBeginEnter()
 {
 	if (TimerHandle.IsValid() == false)
 	{
-		GetOwner()->GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UShootComponent::ShootRate, 0.5f, false);
+		GetOwner()->GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UShootComponent::ShootRate, SpeedAttack, false);
 		ShootStart();
 	}
 }

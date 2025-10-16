@@ -112,3 +112,8 @@ void ACharaPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 }
 
+void ACharaPlayer::SetStress(float StressAdd)
+{
+	Stress += StressAdd;
+}
+

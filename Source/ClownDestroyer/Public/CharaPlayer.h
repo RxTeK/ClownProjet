@@ -82,7 +82,13 @@ public:
 	UPROPERTY(EditAnywhere, Category = "UI")
 	TSubclassOf<UHealthWidget> HealthWidgetClass;
 
+	UFUNCTION()
+	void SetStress(float StressAdd);
+
 	private:
 	UHealthWidget* HealthWidgetInstance;
+
+	UPROPERTY()
+	float Stress;
 	 
 };

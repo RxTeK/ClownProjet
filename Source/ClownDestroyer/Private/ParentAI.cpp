@@ -3,6 +3,9 @@
 
 #include "ParentAI.h"
 
+#include "CharaPlayer.h"
+#include "Kismet/GameplayStatics.h"
+
 // Sets default values
 AParentAI::AParentAI()
 {
@@ -31,4 +34,20 @@ void AParentAI::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
+
+void AParentAI::SetPV(int Damage)
+{
+	PV = PV - Damage;
+	if (PV <= 0)
+	{
+		ACharaPlayer* Character = Cast<ACharaPlayer>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
+		if (Character)
+		{
+			Character->SetStress(Stress);
+			K2_DestroyActor();
+		}
+	}
+}
+
+
 
