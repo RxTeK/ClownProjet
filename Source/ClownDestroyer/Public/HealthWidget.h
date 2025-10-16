@@ -18,9 +18,5 @@ public:
 	/** Met à jour la barre de vie (valeur entre 0.0f et 1.0f) */
 	UFUNCTION(BlueprintCallable)
 	void UpdateHealth(float HealthPercent);
-
-protected:
-	/** Référence à la ProgressBar (liée dans le Blueprint) */
-	UPROPERTY(meta = (BindWidget))
-	UProgressBar* HealthProgressBar;
+	
 };
