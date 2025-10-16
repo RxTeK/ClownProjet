@@ -84,5 +84,5 @@ public:
 
 	private:
 	UHealthWidget* HealthWidgetInstance;
-	
+	 
 };

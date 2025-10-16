@@ -30,7 +30,6 @@ ACharaPlayer::ACharaPlayer()
 
 	ArrowPlayer = CreateDefaultSubobject<UArrowComponent>("Arrow Player");
 	ArrowPlayer->SetupAttachment(GetCapsuleComponent());
-
 }
 
 // Called when the game starts or when spawned
@@ -43,6 +42,7 @@ void ACharaPlayer::BeginPlay()
 		if (HealthWidgetInstance)
 		{
 			HealthWidgetInstance->AddToViewport();
+			HealthWidgetInstance->UpdateHealth(0.5f);
 		}
 	}
 	

@@ -2,11 +2,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ParentAI.h"
 #include "GameFramework/Character.h"
 #include "Clown.generated.h"
 
 UCLASS()
-class CLOWNDESTROYER_API AClown : public ACharacter
+class CLOWNDESTROYER_API AClown : public AParentAI
 {
 	GENERATED_BODY()
 
@@ -42,7 +43,4 @@ public:
 
 	void AttackPlayer();
 	void ResetAttack();
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stat")
-	int Pv = 2;
 };
