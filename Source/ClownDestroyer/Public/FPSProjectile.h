@@ -31,7 +31,7 @@ public:
 	void FireInDirection(const FVector& ShootDirection);
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Projectile")
-	float Damage;
+	int Damage;
  
 protected:
 	virtual void BeginPlay() override;

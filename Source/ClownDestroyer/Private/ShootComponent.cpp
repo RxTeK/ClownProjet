@@ -5,6 +5,7 @@
 
 #include "CharaPlayer.h"
 #include "FPSProjectile.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 
 // Sets default values for this component's properties
 UShootComponent::UShootComponent()
@@ -66,6 +67,9 @@ void UShootComponent::ShootStart()
 	if (Projectile)
 	{
 		Projectile->FireInDirection(Character->ArrowPlayer->GetForwardVector());
+		Projectile->InitialLifeSpan = lifeTime;
+		Projectile->ProjectileMovementComponent->InitialSpeed = ProjectilSpeed;
+		Projectile->ProjectileMovementComponent->MaxSpeed = ProjectilSpeed;
 	}
 }
 

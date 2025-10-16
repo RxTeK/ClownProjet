@@ -20,13 +20,12 @@ AFPSProjectile::AFPSProjectile()
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
 	ProjectileMovementComponent->SetUpdatedComponent(CollisionComponent);
-	ProjectileMovementComponent->InitialSpeed = 300.0f;
-	ProjectileMovementComponent->MaxSpeed = 300.0f;
+
 	ProjectileMovementComponent->bRotationFollowsVelocity = true;
 	ProjectileMovementComponent->bShouldBounce = false;
 	ProjectileMovementComponent->ProjectileGravityScale = 0.0f; // Désactive la gravité
 
-	InitialLifeSpan = 10.0f; // Destruction après 10 secondes
+	 // Destruction après 10 secondes
 }
 
 void AFPSProjectile::BeginPlay()

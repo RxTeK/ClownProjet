@@ -41,6 +41,12 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float SpeedAttack = 1.f;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float lifeTime;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float ProjectilSpeed;
 	
 	
 };
