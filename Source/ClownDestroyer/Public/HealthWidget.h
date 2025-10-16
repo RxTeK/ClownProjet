@@ -16,7 +16,7 @@ protected:
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void UpdateHealth(float HealthPercent);
+	void UpdateHealth(float StressPercent);
 
 protected:
 	UPROPERTY(meta = (BindWidget))

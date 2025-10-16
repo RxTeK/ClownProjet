@@ -11,10 +11,10 @@ void UHealthWidget::NativeConstruct()
 	}
 }
 
-void UHealthWidget::UpdateHealth(float HealthPercent)
+void UHealthWidget::UpdateHealth(float StressPercent)
 {
 	if (HealthSlider)
 	{
-		HealthSlider->SetValue(HealthPercent);
+		HealthSlider->SetValue(StressPercent);
 	}
 }

@@ -77,6 +77,7 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	FVector2D RotationVector;
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	int PV = 3;
 
 	UPROPERTY(EditAnywhere, Category = "UI")
@@ -90,5 +91,4 @@ public:
 
 	UPROPERTY()
 	float Stress;
-	 
 };
