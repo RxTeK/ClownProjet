@@ -88,6 +88,7 @@ void ACharaPlayer::Tick(float DeltaTime)
 
 	FRotator Rotator = UKismetMathLibrary::FindLookAtRotation(GetSprite()->GetComponentLocation(),CameraComponent->GetComponentLocation());
 	GetSprite()->SetWorldRotation(FRotator(0, Rotator.Yaw - 90, Rotator.Roll - 45));
+	SetStress(-PassiveStress);
 
 }
 
@@ -114,6 +115,41 @@ void ACharaPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 void ACharaPlayer::SetStress(float StressAdd)
 {
-	Stress += StressAdd;
+	float Stressing = StressAdd;
+	if (rage && FMath::Abs(Stressing) >= 1)
+	{
+		Stressing = 0.f;
+		GEngine->AddOnScreenDebugMessage(-1,2.f,FColor::Red,"Stressing");
+	}
+	Stress += Stressing;
+	
+	if (GetStress() <= 0)
+	{
+		if (EndGameClass && !EndGameInstance)
+		{
+			EndGameInstance = CreateWidget<UEndGame>(GetWorld(), EndGameClass);
+			if (EndGameInstance)
+			{
+				EndGameInstance->AddToViewport();
+			}
+		}	
+	}
+	if (GetStress() >= 100)
+	{
+		rage = true;
+		GEngine->AddOnScreenDebugMessage(-1,2.f,FColor::Red,"Rage");
+
+	}
+	if (GetStress() <= 50 && rage)
+	{
+		rage = false;
+		GEngine->AddOnScreenDebugMessage(-1,2.f,FColor::Red,"NoRage");
+	}
+	Stress = FMath::Clamp(Stress, 0.0f, 100.0f);
+}
+
+float ACharaPlayer::GetStress()
+{
+	return Stress;
 }
 

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "EndGame.h"
 #include "PaperZDCharacter.h"
 #include "GameFramework/Character.h"
 #include "HealthWidget.h" 
@@ -77,18 +78,29 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	FVector2D RotationVector;
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	int PV = 3;
-
 	UPROPERTY(EditAnywhere, Category = "UI")
 	TSubclassOf<UHealthWidget> HealthWidgetClass;
+
+	UPROPERTY(EditAnywhere, Category = "UI")
+	TSubclassOf<UEndGame> EndGameClass;
 
 	UFUNCTION()
 	void SetStress(float StressAdd);
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float PassiveStress = 0.01f;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetStress();
+
 	private:
 	UHealthWidget* HealthWidgetInstance;
 
+	bool rage;
+
 	UPROPERTY()
-	float Stress;
+	float Stress = 50.f;
+
+	UPROPERTY()
+	UEndGame* EndGameInstance;
 };
