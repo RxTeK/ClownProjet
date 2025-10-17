@@ -47,16 +47,14 @@ void AClown::AttackPlayer()
 	
 	if (ACharaPlayer* Player = Cast<ACharaPlayer>(PlayerPawn))
 	{
-		Player->PV -= 1;
-		FVector Launch(0.0f, 0.0f, 100.0f);
+		FVector Launch(0.0f, 0.0f, 500.0f);
 
 		Player->LaunchCharacter(Launch,false, false);
-		if (Player->PV <= 0)
-		{
+	/*	{
 			FVector LaunchKo(0.0f, 0.0f, 5000.0f);
 
 			Player->LaunchCharacter(LaunchKo,false, false);
-		}
+		} */
 	}
 	GetWorldTimerManager().SetTimer(AttackCooldownTimer, this, &AClown::ResetAttack, AttackCooldown, false);
 }

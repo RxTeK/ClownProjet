@@ -22,7 +22,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AI")
-	float FollowDistance = 1500.f;
+	float FollowDistance = 5000.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AI")
 	float AttackRange = 150.f;
