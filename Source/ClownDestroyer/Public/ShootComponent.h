@@ -46,7 +46,7 @@ public:
 	float lifeTime;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	float ProjectilSpeed;
+	float ProjectilSpeed = 450 ;
 	
 	
 };
