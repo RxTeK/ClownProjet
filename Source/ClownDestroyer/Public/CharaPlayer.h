@@ -93,8 +93,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	float GetStress();
 
-	private:
 	UHealthWidget* HealthWidgetInstance;
+	
+	private:
 
 	bool rage;
 

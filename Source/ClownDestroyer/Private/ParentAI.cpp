@@ -2,8 +2,8 @@
 
 
 #include "ParentAI.h"
-
 #include "CharaPlayer.h"
+#include "HealthWidget.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -40,14 +40,22 @@ void AParentAI::SetPV(int Damage)
 	PV = PV - Damage;
 	if (PV <= 0)
 	{
-		ACharaPlayer* Character = Cast<ACharaPlayer>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
+		ACharaPlayer* Character = Cast<ACharaPlayer>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
 		if (Character)
 		{
 			Character->SetStress(Stress);
+          
+			if (Character->HealthWidgetInstance)
+			{
+				Character->HealthWidgetInstance->AddScore(1); // +1 à chaque kill
+			}
+          
 			K2_DestroyActor();
 		}
 	}
 }
+
+
 
 
 
