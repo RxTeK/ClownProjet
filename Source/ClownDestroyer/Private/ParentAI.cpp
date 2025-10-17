@@ -4,7 +4,10 @@
 #include "ParentAI.h"
 #include "CharaPlayer.h"
 #include "HealthWidget.h"
+#include "PaperFlipbookComponent.h"
+#include "Camera/CameraComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMathLibrary.h"
 
 // Sets default values
 AParentAI::AParentAI()
@@ -18,6 +21,7 @@ AParentAI::AParentAI()
 void AParentAI::BeginPlay()
 {
 	Super::BeginPlay();
+	Characte = Cast<ACharaPlayer>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	
 }
 
@@ -25,6 +29,12 @@ void AParentAI::BeginPlay()
 void AParentAI::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (Characte != nullptr)
+	{
+		FRotator Rotator = UKismetMathLibrary::FindLookAtRotation(GetSprite()->GetComponentLocation(),Characte->CameraComponent->GetComponentLocation());
+		GetSprite()->SetWorldRotation(FRotator(0, Rotator.Yaw - 90, Rotator.Roll - 45));
+	}
+	
 
 }
 
@@ -40,7 +50,7 @@ void AParentAI::SetPV(int Damage)
 	PV = PV - Damage;
 	if (PV <= 0)
 	{
-		ACharaPlayer* Character = Cast<ACharaPlayer>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+		ACharaPlayer* Character = Cast<ACharaPlayer>(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
 		if (Character)
 		{
 			Character->SetStress(Stress);
@@ -54,8 +64,6 @@ void AParentAI::SetPV(int Damage)
 		}
 	}
 }
-
-
 
 
 

@@ -3,11 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CharaPlayer.h"
+#include "PaperZDCharacter.h"
 #include "GameFramework/Character.h"
 #include "ParentAI.generated.h"
 
 UCLASS()
-class CLOWNDESTROYER_API AParentAI : public ACharacter
+class CLOWNDESTROYER_API AParentAI : public APaperZDCharacter
 {
 	GENERATED_BODY()
 
@@ -34,8 +36,7 @@ public:
 	UFUNCTION()
 	void SetPV(int Damage);
 
-
-	
-
+	UPROPERTY(EditAnywhere,BlueprintReadOnly)
+	ACharaPlayer* Characte;
 	
 };

@@ -92,6 +92,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	float GetStress();
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float Chance;
 
 	UHealthWidget* HealthWidgetInstance;
 	
@@ -104,4 +107,5 @@ public:
 
 	UPROPERTY()
 	UEndGame* EndGameInstance;
+
 };
